@@ -1,5 +1,4 @@
-# Simple DevOps Project - 4
-
+# Project Demonstration
 
 
 In this project, I will explain how to *use Git, Jenkins, Ansible, DockerHub, Docker to DEPLOY on a docker container.,*
@@ -103,7 +102,6 @@ here we use 2 variables
 - `BUILD_ID` -  The current build id
 - `JOB_NAME` - Name of the project of this build. This is the name you gave your job when you first set it up.
 
-for more info Please refer [this URL](https://wiki.jenkins.io/display/JENKINS/Building+a+software+project)
 
 Lets modify jenkins job which was created in *Part-01* as below.
 
@@ -133,5 +131,3 @@ Lets modify jenkins job which was created in *Part-01* as below.
         - `docker push valaxy/$JOB_NAME:latest`
         - `docker rmi $JOB_NAME:v1.$BUILD_ID valaxy/$JOB_NAME:v1.$BUILD_ID` 
         - `valaxy/$JOB_NAME:latest`
-##### References
-[1] - [Jenkins Docs - Building Software Projects](https://wiki.jenkins.io/display/JENKINS/Building+a+software+project)
