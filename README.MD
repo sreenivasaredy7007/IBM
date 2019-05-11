@@ -36,23 +36,16 @@ In *part-01* I created Docker image on ansible server through Jenkins job and pu
        - Remote directory	: `//opt//docker`
        - Exec Command: 
 	      - `cd /opt/docker`
-          - `docker build -t valaxy_demo .`
-	      - `docker tag valaxy_demo valaxy/valaxy_demo`
-          - `docker push valaxy/valaxy_demo`
-          - `docker rmi valaxy_demo valaxy/valaxy_demo`
+          - `docker build -t project_demo .`
+	      - `docker tag project_demo project/project_demo`
+          - `docker push project/project_demo`
+          - `docker rmi project_demo project/project_demo`
               
-1. Login to Docker host and check images and containers. (no images and containers)
-
-1. login to docker hub and check. shouldn't find images with for valaxy_demo 
-
-1. Execute Jenkins job
-
-1. check images in Docker hub. Now you could able to see new images pushed to Valaxy Docker_Hub
 
 #### Troubleshooting:
 1. Docker should be installed on ansible server 
-1. Should login to "docker hub" on ansible server
-1. ansadmin user should be part of `docker` group
+2. Should login to "docker hub" on ansible server
+3. ansadmin user should be part of `docker` group
 
 In *Part-02* we create *create_docker_container.yml* playbook. this get intiated by jenkins job, run by ansible and exected on dokcer_host
 
@@ -65,14 +58,14 @@ In *Part-02* we create *create_docker_container.yml* playbook. this get intiated
        become: true
        tasks:
         - name: stop previous version docker
-          shell: docker stop valaxy_demo
+          shell: docker stop project_demo
         - name: remove stopped container
-          shell: docker rm -f valaxy_demo	  
+          shell: docker rm -f project_demo	  
         - name: remove docker images
-          shell: docker image rm -f valaxy/valaxy_demo
+          shell: docker image rm -f project/project_demo
           
         - name: create docker image
-          shell: docker run -d --name valaxy_demo -p 8090:8080 valaxy/valaxy_demo
+          shell: docker run -d --name project_demo -p 8090:8080 project/project_demo
 
 1. Add this script to Jenkins job.
    - Chose *"configure"* to modify your jenkins job. 
@@ -107,7 +100,7 @@ Lets modify jenkins job which was created in *Part-01* as below.
 
 1. Create Jenkins job 
    - *Source Code Management:*
-      - Repository : `https://github.com/ValaxyTech/hello-world.git`
+      - Repository : `https://github.com/sreenivasaredy7007/IBM.git`
       - Branches to build : `*/master`  
    - *Build:*
      - Root POM:`pom.xml`
@@ -125,9 +118,9 @@ Lets modify jenkins job which was created in *Part-01* as below.
      - Remote directory	: `//opt//docker`
       	- `cd /opt/docker`
         - `docker build -t $JOB_NAME:v1.$BUILD_ID .`
-        - `docker tag $JOB_NAME:v1.$BUILD_ID valaxy/$JOB_NAME:v1.$BUILD_ID`
-        - `docker tag $JOB_NAME:v1.$BUILD_ID valaxy/$JOB_NAME:latest`
-        - `docker push valaxy/$JOB_NAME:v1.$BUILD_ID`
-        - `docker push valaxy/$JOB_NAME:latest`
-        - `docker rmi $JOB_NAME:v1.$BUILD_ID valaxy/$JOB_NAME:v1.$BUILD_ID` 
-        - `valaxy/$JOB_NAME:latest`
+        - `docker tag $JOB_NAME:v1.$BUILD_ID project/$JOB_NAME:v1.$BUILD_ID`
+        - `docker tag $JOB_NAME:v1.$BUILD_ID project/$JOB_NAME:latest`
+        - `docker push project/$JOB_NAME:v1.$BUILD_ID`
+        - `docker push project/$JOB_NAME:latest`
+        - `docker rmi $JOB_NAME:v1.$BUILD_ID project/$JOB_NAME:v1.$BUILD_ID` 
+        - `project/$JOB_NAME:latest`
