@@ -124,3 +124,9 @@ Lets modify jenkins job which was created in *Part-01* as below.
         - `docker push project/$JOB_NAME:latest`
         - `docker rmi $JOB_NAME:v1.$BUILD_ID project/$JOB_NAME:v1.$BUILD_ID` 
         - `project/$JOB_NAME:latest`
+
+
+
+Thanks and Regards,
+Sreenivasa Reddy
+7996375174
