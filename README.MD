@@ -65,7 +65,7 @@ In *Part-02* we create *create_docker_container.yml* playbook. this get intiated
           shell: docker image rm -f project/project_demo
           
         - name: create docker image
-          shell: docker run -d --name project_demo -p 8090:8080 project/project_demo
+          shell: docker run -d --name project_demo -p 8000:8080 project/project_demo
 
 1. Add this script to Jenkins job.
    - Chose *"configure"* to modify your jenkins job. 
